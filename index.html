@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1d2a24" />
+  <title>竹藪迷案｜誰殺了武弘？</title>
+  <style>
+    :root{
+      --bg:#17211c;
+      --paper:#f3ead8;
+      --paper2:#e7dbc2;
+      --ink:#2f2a24;
+      --muted:#6f665b;
+      --green:#334b3c;
+      --green2:#496957;
+      --gold:#b9955b;
+      --red:#7b3935;
+      --line:#cdbd9d;
+      --shadow:0 12px 32px rgba(0,0,0,.22);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(98,132,107,.18), transparent 28%),
+        linear-gradient(180deg,#142019 0%,#1d2a24 48%,#121915 100%);
+      color:var(--ink);
+      min-height:100vh;
+    }
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.05;
+      background-image:
+        linear-gradient(90deg, transparent 49%, #fff 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, #fff 50%, transparent 51%);
+      background-size:38px 38px;
+    }
+    .wrap{width:min(920px,92vw);margin:0 auto;padding:24px 0 56px}
+    .hero{
+      color:#f5efdf;
+      text-align:center;
+      padding:44px 16px 26px;
+    }
+    .eyebrow{
+      letter-spacing:.28em;
+      font-size:.8rem;
+      color:#c9b98f;
+      margin-bottom:10px;
+    }
+    h1{
+      margin:.1em 0;
+      font-size:clamp(2rem,8vw,4.5rem);
+      letter-spacing:.08em;
+      font-weight:700;
+    }
+    .subtitle{color:#d5d0c4;margin-top:10px;font-size:1rem}
+    .seal{
+      width:68px;height:68px;border:2px solid #b96156;
+      color:#c56a60;
+      display:grid;place-items:center;
+      margin:22px auto 0;
+      transform:rotate(-6deg);
+      font-weight:700;letter-spacing:.15em;
+      background:rgba(123,57,53,.08);
+    }
+    .panel{
+      background:linear-gradient(180deg,var(--paper),#efe3cd);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:var(--shadow);
+      border-radius:18px;
+      margin:18px 0;
+      overflow:hidden;
+      position:relative;
+    }
+    .panel::after{
+      content:"";
+      position:absolute; inset:0;
+      pointer-events:none;
+      background:linear-gradient(90deg,rgba(81,63,44,.03),transparent 18%,transparent 82%,rgba(81,63,44,.03));
+    }
+    .panel-inner{padding:22px;position:relative;z-index:1}
+    .case-meta{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:16px;
+    }
+    .meta{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px;
+      background:rgba(255,255,255,.28);
+      text-align:center;
+    }
+    .meta b{display:block;color:var(--green);margin-bottom:4px}
+    h2{
+      color:var(--green);
+      margin:0 0 8px;
+      font-size:1.45rem;
+      letter-spacing:.06em;
+    }
+    h3{margin:0 0 8px;color:#3d382f}
+    p{line-height:1.85;margin:.55em 0}
+    .intro{
+      border-left:4px solid var(--gold);
+      padding:2px 0 2px 14px;
+      color:#4b443b;
+    }
+    .stage{
+      border-top:1px dashed #ad9c7e;
+      padding-top:18px;
+      margin-top:18px;
+    }
+    .stage:first-child{border-top:none;padding-top:0;margin-top:0}
+    .stage-head{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      margin-bottom:12px;
+    }
+    .stage-no{
+      font-size:.78rem;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+    .tag{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.78rem;
+      color:#5d5549;
+      white-space:nowrap;
+    }
+    .locked .stage-content{display:none}
+    .lockbox{
+      background:rgba(77,70,60,.06);
+      border:1px dashed #a79679;
+      padding:18px;
+      border-radius:14px;
+      text-align:center;
+    }
+    .lock-icon{font-size:2rem}
+    .pw-row{
+      display:flex;
+      gap:8px;
+      margin-top:12px;
+    }
+    input{
+      min-width:0;
+      flex:1;
+      border:1px solid #ad9f87;
+      border-radius:10px;
+      padding:13px 14px;
+      font-size:16px;
+      background:#fffaf0;
+      color:var(--ink);
+      outline:none;
+    }
+    input:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(73,105,87,.12)}
+    button{
+      border:none;
+      border-radius:10px;
+      padding:12px 15px;
+      font-size:.95rem;
+      cursor:pointer;
+      font-family:inherit;
+    }
+    .primary{background:var(--green);color:white}
+    .primary:hover{background:#263b2f}
+    .ghost{background:transparent;border:1px solid #9f9075;color:#544c40}
+    .msg{min-height:1.4em;margin-top:8px;font-size:.88rem;color:var(--red)}
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    details.card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.34);
+      overflow:hidden;
+    }
+    details.card summary{
+      list-style:none;
+      cursor:pointer;
+      padding:16px;
+      font-weight:700;
+      color:var(--green);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+    }
+    details.card summary::-webkit-details-marker{display:none}
+    details.card summary::after{content:"＋";font-size:1.3rem;color:var(--gold)}
+    details[open].card summary::after{content:"－"}
+    .card-body{
+      border-top:1px solid #d7c7aa;
+      padding:14px 16px 17px;
+      line-height:1.8;
+    }
+    .quote{
+      margin:10px 0;
+      padding:12px 14px;
+      background:#e8ddc8;
+      border-left:3px solid var(--red);
+      border-radius:8px;
+    }
+    .clue-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .clue{
+      padding:16px;
+      background:#efe5d1;
+      border:1px solid var(--line);
+      border-radius:14px;
+    }
+    .clue b{color:var(--green)}
+    .mission{
+      margin:16px 0 0;
+      padding:15px;
+      border:1px solid #bea87d;
+      border-radius:12px;
+      background:rgba(185,149,91,.09);
+    }
+    .mission strong{color:#715a34}
+    .verdicts{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .verdict{
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#f9f1e3;
+      font-weight:700;
+    }
+    .twist{
+      background:#241e1a;
+      color:#eee5d5;
+      border:1px solid #57473d;
+      border-radius:15px;
+      padding:18px;
+      margin-top:12px;
+    }
+    .twist h3{color:#d9b574}
+    .footer-note{
+      text-align:center;
+      color:#cfc8bb;
+      margin-top:24px;
+      font-size:.85rem;
+      line-height:1.7;
+    }
+    .reset-wrap{text-align:center;margin-top:18px}
+    .tiny{font-size:.82rem;color:var(--muted)}
+    .hidden{display:none!important}
+    @media(max-width:650px){
+      .wrap{width:min(94vw,920px)}
+      .panel-inner{padding:18px}
+      .case-meta,.cards,.clue-grid,.verdicts{grid-template-columns:1fr}
+      .pw-row{flex-direction:column}
+      button{width:100%}
+      .stage-head{align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="eyebrow">山科竹林・特別搜查卷宗</div>
+      <h1>竹藪迷案</h1>
+      <div class="subtitle">誰殺了武弘？——或者，真相從來沒有那麼簡單。</div>
+      <div class="seal">機密<br>卷宗</div>
+    </header>
+
+    <section class="panel">
+      <div class="panel-inner">
+        <h2>案件說明</h2>
+        <p class="intro">
+          山科驛路附近的竹林中，一名武士死亡。你們是受命重建事件的臨時調查小組。
+          手機只會提供卷宗與新情報；所有推理、討論、判決，都請在小組實體搜查板上完成。
+        </p>
+        <div class="case-meta">
+          <div class="meta"><b>死者</b>金澤武弘</div>
+          <div class="meta"><b>地點</b>山科後山竹林</div>
+          <div class="meta"><b>任務</b>重建可能的真相</div>
+        </div>
+        <p class="tiny">提醒：證詞不是事實。每一份陳述，都可能包含記憶、立場、羞恥、尊嚴與自我辯護。</p>
+      </div>
+    </section>
+
+    <!-- 第一幕 -->
+    <section class="panel" id="stage1">
+      <div class="panel-inner">
+        <div class="stage">
+          <div class="stage-head">
+            <div>
+              <div class="stage-no">第一幕</div>
+              <h2>竹林命案</h2>
+            </div>
+            <span class="tag">已解鎖</span>
+          </div>
+          <div class="stage-content">
+            <p>清晨，樵夫在陰暗竹林中發現武弘的屍體。調查從四份最早取得的證詞開始。</p>
+
+            <div class="cards">
+              <details class="card">
+                <summary>樵夫的證詞</summary>
+                <div class="card-body">
+                  <p>樵夫說，他在後山砍杉樹時發現死者。武弘仰躺在地，胸口有一處傷口，現場附近只有一條繩子和一把梳子。</p>
+                  <div class="quote">「死屍四周的，只有這兩件東西。」</div>
+                  <p>他並注意到竹葉與草有大片被踩亂的痕跡。</p>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>行腳僧的證詞</summary>
+                <div class="card-body">
+                  <p>行腳僧說，前一天中午左右，他曾在路上看見武弘與一名騎馬女子同行。</p>
+                  <p>武弘攜帶佩刀、弓、黑漆箭囊與約二十支箭；女子穿紅褐色外衣，戴著面紗。</p>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>捕吏的證詞</summary>
+                <div class="card-body">
+                  <p>捕吏在當晚逮捕著名強盜多襄丸。多襄丸當時帶著刀、弓、黑漆箭囊與十七支箭。</p>
+                  <p>附近還找到一匹沒有鬃毛的茶紅色馬。</p>
+                  <div class="quote">捕吏因此推測：多襄丸極可能與命案有關。</div>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>老媼的證詞</summary>
+                <div class="card-body">
+                  <p>死者為二十六歲的武士金澤武弘；同行女子是他的妻子真砂，十九歲。</p>
+                  <p>老媼說武弘性情溫和，真砂個性剛烈。她最擔心的，是失去行蹤的女兒。</p>
+                </div>
+              </details>
+            </div>
+
+            <div class="mission">
+              <strong>桌面任務：</strong>
+              把目前資訊分成「幾乎可確認的事實」「只有證詞支持的說法」「尚無法確認的問題」三類。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第二幕 -->
+    <section class="panel locked" id="stage2" data-stage="2">
+      <div class="panel-inner">
+        <div class="stage">
+          <div class="stage-head">
+            <div>
+              <div class="stage-no">第二幕</div>
+              <h2>三個兇手</h2>
+            </div>
+            <span class="tag status">卷宗封存</span>
+          </div>
+
+          <div class="lockbox">
+            <div class="lock-icon">🔒</div>
+            <p>第二批證詞已送達，但仍處於封存狀態。</p>
+            <div class="pw-row">
+              <input id="pw2" type="password" inputmode="text" autocomplete="off" placeholder="輸入第二幕口令">
+              <button class="primary" onclick="unlockStage(2)">解除封印</button>
+            </div>
+            <div class="msg" id="msg2"></div>
+          </div>
+
+          <div class="stage-content">
+            <p>新的卷宗令人震驚：三個人，竟提出三種完全不同的死亡版本。</p>
+
+            <div class="cards">
+              <details class="card">
+                <summary>多襄丸的自白</summary>
+                <div class="card-body">
+                  <p>多襄丸承認欺騙武弘進入竹林，並將他綁住。他又把真砂帶入竹林。</p>
+                  <p>之後，他聲稱真砂要求兩名男子決鬥，自己便解開武弘的繩子，與武弘公平交手。</p>
+                  <div class="quote">「我的大刀在第二十三回合時，刺穿了他的胸膛。」</div>
+                  <p>多襄丸說，真砂在決鬥過程中逃走；他最後帶走武弘的刀、弓與箭。</p>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>真砂的懺悔</summary>
+                <div class="card-body">
+                  <p>真砂說，多襄丸離去後，丈夫仍被綁在杉樹下，並以輕蔑而憎恨的眼神看她。</p>
+                  <p>她感到羞恥與絕望，提出與丈夫一同赴死。</p>
+                  <div class="quote">「我像在作夢一樣，朝著丈夫的胸口，用小刀刺了進去。」</div>
+                  <p>她醒來時，武弘已死；她解開丈夫身上的繩子後離開。</p>
+                </div>
+              </details>
+
+              <details class="card">
+                <summary>武弘亡魂的陳述</summary>
+                <div class="card-body">
+                  <p>武弘則說，真砂曾答應跟多襄丸離開，甚至要求多襄丸殺死丈夫。</p>
+                  <p>多襄丸反而問武弘要不要殺真砂；真砂隨即逃走。</p>
+                  <p>多襄丸之後割開武弘身上的繩索並離去。</p>
+                  <div class="quote">武弘聲稱最後是自己拿起真砂遺落的小刀，刺入胸口。</div>
+                </div>
+              </details>
+            </div>
+
+            <div class="mission">
+              <strong>桌面任務：</strong>
+              請重建三個版本的「案發流程」，並找出至少三組不能同時成立的說法。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三幕 -->
+    <section class="panel locked" id="stage3" data-stage="3">
+      <div class="panel-inner">
+        <div class="stage">
+          <div class="stage-head">
+            <div>
+              <div class="stage-no">第三幕</div>
+              <h2>證據會說話嗎？</h2>
+            </div>
+            <span class="tag status">卷宗封存</span>
+          </div>
+
+          <div class="lockbox">
+            <div class="lock-icon">🔒</div>
+            <p>搜查員送來新的物證紀錄。請等待檢察官公布口令。</p>
+            <div class="pw-row">
+              <input id="pw3" type="password" inputmode="text" autocomplete="off" placeholder="輸入第三幕口令">
+              <button class="primary" onclick="unlockStage(3)">解除封印</button>
+            </div>
+            <div class="msg" id="msg3"></div>
+          </div>
+
+          <div class="stage-content">
+            <p>你們開始意識到：物證未必能替任何一份證詞背書。</p>
+
+            <div class="clue-grid">
+              <div class="clue">
+                <b>線索 A｜胸口傷勢</b>
+                <p>死者胸口只有一處致命傷。單憑傷口本身，無法確定是他殺還是自殺。</p>
+              </div>
+              <div class="clue">
+                <b>線索 B｜現場踩踏</b>
+                <p>竹葉與草確實遭大量踩踏，能支持「現場曾發生激烈活動」，卻無法證明一定存在二十三回合決鬥。</p>
+              </div>
+              <div class="clue">
+                <b>線索 C｜武弘的武器</b>
+                <p>案發前，武弘帶有刀、弓、箭；捕獲多襄丸時，多襄丸身上確有相似物品。</p>
+              </div>
+              <div class="clue">
+                <b>線索 D｜繩索</b>
+                <p>樵夫確認現場留下繩索。三份核心證詞都承認武弘曾被綁住，但「何時解開」彼此衝突。</p>
+              </div>
+              <div class="clue">
+                <b>線索 E｜真砂的小刀</b>
+                <p>真砂與武弘都提到一把小刀，而且兩人都聲稱它曾進入武弘胸口。</p>
+              </div>
+              <div class="clue">
+                <b>線索 F｜遺失物</b>
+                <p>樵夫說現場只有繩子與梳子。那麼，如果小刀確實存在，它最後去了哪裡？</p>
+              </div>
+            </div>
+
+            <div class="mission">
+              <strong>桌面任務：</strong>
+              重新檢查你們上一幕的推論。哪些物證真的能「證明」？哪些只能「支持某種可能」？
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第四幕 -->
+    <section class="panel locked" id="stage4" data-stage="4">
+      <div class="panel-inner">
+        <div class="stage">
+          <div class="stage-head">
+            <div>
+              <div class="stage-no">第四幕</div>
+              <h2>終極審判</h2>
+            </div>
+            <span class="tag status">卷宗封存</span>
+          </div>
+
+          <div class="lockbox">
+            <div class="lock-icon">🔒</div>
+            <p>案件即將結案。請等待最後審理口令。</p>
+            <div class="pw-row">
+              <input id="pw4" type="password" inputmode="text" autocomplete="off" placeholder="輸入第四幕口令">
+              <button class="primary" onclick="unlockStage(4)">解除封印</button>
+            </div>
+            <div class="msg" id="msg4"></div>
+          </div>
+
+          <div class="stage-content">
+            <p>你們必須做出一份小組共同判決。請選擇目前最合理的結論，並準備向其他調查組辯護。</p>
+
+            <div class="verdicts">
+              <div class="verdict">A．多襄丸殺害武弘</div>
+              <div class="verdict">B．真砂殺害武弘</div>
+              <div class="verdict">C．武弘自殺</div>
+              <div class="verdict">D．證據不足，無法判定</div>
+            </div>
+
+            <div class="mission">
+              <strong>判決書必須包含：</strong>
+              3項支持你們判斷的證據，以及2項你們目前仍無法解釋的矛盾。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 終幕 -->
+    <section class="panel locked" id="stage5" data-stage="5">
+      <div class="panel-inner">
+        <div class="stage">
+          <div class="stage-head">
+            <div>
+              <div class="stage-no">終幕</div>
+              <h2>遺失的小刀</h2>
+            </div>
+            <span class="tag status">最高機密</span>
+          </div>
+
+          <div class="lockbox">
+            <div class="lock-icon">🔒</div>
+            <p>請先完成全班判決。最後一份卷宗，只有在檢察官許可後才能開啟。</p>
+            <div class="pw-row">
+              <input id="pw5" type="password" inputmode="text" autocomplete="off" placeholder="輸入終幕口令">
+              <button class="primary" onclick="unlockStage(5)">開啟最終卷宗</button>
+            </div>
+            <div class="msg" id="msg5"></div>
+          </div>
+
+          <div class="stage-content">
+            <div class="twist">
+              <h3>⚠ 新疑點入卷</h3>
+              <p>武弘亡魂聲稱：在他死後，有人悄悄靠近，拔走了插在胸口的小刀。</p>
+              <p>然而，第一個發現屍體的樵夫卻非常肯定地說：</p>
+              <div class="quote">「死屍四周的，只有繩子和梳子。」</div>
+              <p><strong>如果小刀真的存在，那把小刀最後去了哪裡？</strong></p>
+              <p>再想一步：你們從第一幕開始，為什麼比較少懷疑樵夫？</p>
+            </div>
+
+            <div class="mission">
+              <strong>最後問題：</strong>
+              如果每個人都說了「對自己而言可以成立的真話」，那麼真正的真相究竟在哪裡？
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-inner" style="text-align:center">
+        <h2>案件尚未真正結束</h2>
+        <p>你相信的，究竟是真相，還是一個比較能說服你的故事？</p>
+        <div class="reset-wrap">
+          <button class="ghost" onclick="resetGame()">重設本機解鎖紀錄</button>
+        </div>
+        <p class="tiny">只有需要重新測試時才按。重設後第二幕之後會重新上鎖。</p>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      《竹藪迷案》課堂互動版<br>
+      手機提供線索，推理留在桌面與人群之中。
+    </div>
+  </main>
+
+<script>
+  // ===== 教師可自行修改的密碼 =====
+  // 注意：純前端網頁無法真正保密，學生若檢視原始碼仍可看到密碼。
+  // 一般課堂情境已足夠使用。
+  const PASSWORDS = {
+    2: "竹影",
+    3: "二十三",
+    4: "真相",
+    5: "樵夫"
+  };
+
+  function normalize(text){
+    return text.trim().replace(/\s+/g,"").toLowerCase();
+  }
+
+  function unlockStage(stage){
+    const input = document.getElementById("pw" + stage);
+    const msg = document.getElementById("msg" + stage);
+    const expected = PASSWORDS[stage];
+
+    if(normalize(input.value) === normalize(expected)){
+      localStorage.setItem("bambooStage" + stage, "unlocked");
+      revealStage(stage, true);
+      msg.textContent = "";
+    } else {
+      msg.textContent = "口令錯誤。卷宗仍處於封存狀態。";
+      input.select();
+    }
+  }
+
+  function revealStage(stage, scroll){
+    const section = document.getElementById("stage" + stage);
+    if(!section) return;
+
+    section.classList.remove("locked");
+
+    const lockbox = section.querySelector(".lockbox");
+    if(lockbox) lockbox.classList.add("hidden");
+
+    const status = section.querySelector(".status");
+    if(status){
+      status.textContent = stage === 5 ? "最終卷宗已開啟" : "已解鎖";
+    }
+
+    if(scroll){
+      setTimeout(() => {
+        section.scrollIntoView({behavior:"smooth", block:"start"});
+      }, 100);
+    }
+  }
+
+  function restoreProgress(){
+    [2,3,4,5].forEach(stage => {
+      if(localStorage.getItem("bambooStage" + stage) === "unlocked"){
+        revealStage(stage, false);
+      }
+    });
+  }
+
+  function resetGame(){
+    [2,3,4,5].forEach(stage => localStorage.removeItem("bambooStage" + stage));
+    location.reload();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    restoreProgress();
+
+    [2,3,4,5].forEach(stage => {
+      const input = document.getElementById("pw" + stage);
+      input.addEventListener("keydown", (e) => {
+        if(e.key === "Enter") unlockStage(stage);
+      });
+    });
+  });
+</script>
+</body>
+</html>
